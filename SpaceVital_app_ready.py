@@ -19,6 +19,146 @@ import requests
 from fpdf import FPDF
 from gtts import gTTS
 from io import BytesIO
+st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;700&display=swap');
+
+    .stApp {
+        background: radial-gradient(circle at 50% -20%, #151d36 0%, #080c19 50%, #03050a 100%) !important;
+        color: #E2E8F0 !important;
+        font-family: 'Inter', sans-serif !important;
+    }
+
+    header[data-testid="stHeader"] {
+        background: rgba(0,0,0,0) !important;
+    }
+    footer { visibility: hidden; }
+
+    .main .block-container {
+        padding: 1.8rem 1.2rem 3rem 1.2rem !important;
+        max-width: 1300px !important;
+    }
+
+    h1, h2, h3, h4, h5, h6, p, div, span, label, .stMarkdown {
+        font-family: 'Inter', sans-serif !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+    }
+
+    h1 {
+        font-family: 'Orbitron', sans-serif !important;
+        background: linear-gradient(90deg, #00F0FF 0%, #7000FF 50%, #FF007F 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 900 !important;
+        letter-spacing: 2px;
+        text-align: center;
+        margin-bottom: 1.5rem !important;
+        filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.35));
+    }
+
+    h2, h3 {
+        color: #00F0FF !important;
+        font-family: 'Orbitron', sans-serif !important;
+        letter-spacing: 1px;
+        border-bottom: 1px dashed rgba(0, 240, 255, 0.25);
+        padding-bottom: 8px;
+        margin-top: 1.2rem !important;
+    }
+
+    div[data-testid="stMetric"], .stMetric {
+        background: rgba(13, 21, 39, 0.75) !important;
+        border: 1px solid rgba(0, 240, 255, 0.25) !important;
+        border-radius: 16px !important;
+        padding: 18px !important;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0, 240, 255, 0.03) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        transition: all 0.35s ease !important;
+    }
+
+    div[data-testid="stMetric"]:hover {
+        transform: translateY(-5px) !important;
+        border-color: #00F0FF !important;
+        box-shadow: 0 10px 25px rgba(0, 240, 255, 0.3) !important;
+    }
+
+    div[data-testid="stMetricValue"] {
+        color: #00F0FF !important;
+        font-family: 'Orbitron', sans-serif !important;
+        font-weight: 800 !important;
+        text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+    }
+
+    div[data-testid="stMetricLabel"] {
+        color: #94A3B8 !important;
+        font-weight: 600 !important;
+    }
+
+    section[data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #090e1a 0%, #04060c 100%) !important;
+        border-right: 1px solid rgba(0, 240, 255, 0.15) !important;
+    }
+
+    .stButton > button {
+        background: linear-gradient(135deg, #00F0FF 0%, #7000FF 100%) !important;
+        color: #FFFFFF !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+        border: none !important;
+        border-radius: 12px !important;
+        padding: 0.7rem 1.4rem !important;
+        width: 100% !important;
+        box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .stButton > button:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 25px rgba(0, 240, 255, 0.6) !important;
+        background: linear-gradient(135deg, #7000FF 0%, #00F0FF 100%) !important;
+    }
+
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+        border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+    }
+
+    .stTabs [data-baseweb="tab"] {
+        background-color: rgba(15, 23, 42, 0.6) !important;
+        border-radius: 10px 10px 0 0 !important;
+        color: #94A3B8 !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        padding: 8px 16px !important;
+    }
+
+    .stTabs [aria-selected="true"] {
+        background: rgba(0, 240, 255, 0.15) !important;
+        color: #00F0FF !important;
+        border: 1px solid #00F0FF !important;
+        border-bottom: none !important;
+    }
+
+    .stDataFrame, div[data-testid="stTable"] {
+        background: rgba(13, 21, 39, 0.7) !important;
+        border-radius: 12px !important;
+        overflow-x: auto !important;
+        border: 1px solid rgba(0, 240, 255, 0.2) !important;
+    }
+
+    .stAlert {
+        background: rgba(15, 23, 42, 0.8) !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: #05070e; }
+    ::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.4); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00F0FF; }
+    </style>
+""", unsafe_allow_html=True)
 
 # =========================================================
 # ADVANCED ML & SECURITY IMPORTS (WITH SAFE FALLBACKS)
