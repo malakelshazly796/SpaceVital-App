@@ -1014,7 +1014,10 @@ else:
         st.stop()
     selected_crew = row[0]
     st.sidebar.markdown(f"**ACTIVE CREW:** {html.escape(str(selected_crew))}")
-    seed_demo_baseline_if_needed(selected_crew)
+    try:
+        seed_demo_baseline_if_needed(selected_crew)
+    except Exception:
+        pass
 
     if st.sidebar.button("🔒 LOGOUT SESSION"):
         st.session_state["authenticated_user"] = None
